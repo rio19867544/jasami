@@ -12,50 +12,18 @@ import {
   View,
   TextInput,
   AsyncStorage,
-  Navigator,
+  BackHandler,
 } from 'react-native';
-import Add from './components/add.js';
-import Info from './components/info.js';
+import { StackNavigator } from 'react-navigation';
+import Items from './src/pages/items.js';
+import Home from './src/pages/home.js';
 
-export default class jasami extends Component {
-    constructor(props){
-       super(props);
-     }
-
-     renderScene(route,nav) {
-       if (route.name === 'add') return <Add navigator={nav}/>;
-        return <Info navigator={nav}/>;
-     }
-
-    render() {
-      return (
-        <View style={styles.container}>
-          <Navigator style={styles.navigator}
-             initialRoute={{ name: 'info'}}
-             renderScene={this.renderScene.bind(this)}
-             configureScene = {({ title }) => {
-              return {
-                ...Navigator.SceneConfigs.FloatFromBottom,
-                gestures: null,
-                defaultTransitionVelocity: null,
-                springFriction: null,
-                springTension: 1000,
-                animationInterpolators: {
-                    into: r => r.opacity = 1,
-                    out: r => r.opacity = 1,
-                },
-              };
-            }}
-         />
-       </View>
-      );
-    }
-}
-
-const styles = StyleSheet.create({
-    container: {
-      flex:1,
-    },
+const jasami = StackNavigator({
+  Home: { screen: Home },
+  Items: { screen: Items },
+}, {
+  headerMode: 'none',
+  initialRouteName: 'Home',
 });
 
 AppRegistry.registerComponent('jasami', () => jasami);
