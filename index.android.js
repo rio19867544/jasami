@@ -17,10 +17,12 @@ import {
 import { StackNavigator } from 'react-navigation';
 import Items from './src/pages/items.js';
 import Home from './src/pages/home.js';
+import Labels from './src/pages/labels.js';
 
 const jasami = StackNavigator({
   Home: { screen: Home },
   Items: { screen: Items },
+  Labels: { screen: Labels },
 }, {
   headerMode: 'none',
   initialRouteName: 'Home',

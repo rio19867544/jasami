@@ -49,8 +49,13 @@ export default StyleSheet.create({
       alignItems: 'center',
     },
     dialog: {
+      width: 350,
+      height: 400,
+      borderRadius: 10,
+    },
+    dialogSmall: {
       width: 300,
-      height: 300,
+      height: 180,
       borderRadius: 10,
     },
     dialogTitle: {
@@ -70,34 +75,60 @@ export default StyleSheet.create({
       borderTopColor: '#b7b7b7',
     },
     dialogItem: {
-      marginVertical: 10,
-      flex:1,
       alignItems: 'center',
       flexDirection: 'row',
+      margin: 10,
     },
     itemTitle: {
       fontSize: 16,
       fontWeight: 'bold',
-      marginHorizontal: 5,
     },
     input: {
       borderWidth: 1,
       borderColor: '#b7b7b7',
+      height: 35,
+      borderRadius: 5,
+      fontSize: 12,
+      flex:1,
+    },
+    inputNoBorder: {
       flex:1,
       height: 35,
       borderRadius: 5,
       fontSize: 12,
     },
-    textArea: {
+    chooseArea: {
       borderWidth: 1,
       borderColor: '#b7b7b7',
-      flex:1,
-      minHeight: 100,
+      height: 200,
       borderRadius: 5,
+      marginTop: 10,
     },
-    textAreaItem: {
-      borderWidth: 1,
+    chooseItem:{
+      flexDirection:'row',
+      backgroundColor: "white",
+      padding: 10,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    label: {
+      width: 40,
+      height: 40,
+    },
+    labelSmall: {
+      marginLeft: 5,
+      width: 30,
+      height: 30,
+    },
+    textIcon: {
+      borderWidth: 2,
       borderColor: '#b7b7b7',
+      backgroundColor: 'white',
+      borderRadius: 20,
+      maxHeight: 40,
+      maxWidth: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     // basic property
     borderBlack: {
@@ -124,6 +155,10 @@ export default StyleSheet.create({
     flex1: {
       flex:1,
     },
+    flexC1: {
+      flex:1,
+      alignItems: 'center',
+    },
     flexCC1: {
       flex:1,
       justifyContent: 'center',
@@ -149,5 +184,12 @@ export default StyleSheet.create({
     },
     bgWhite: {
       backgroundColor: 'white',
+    },
+    flexRow:{
+      flexDirection: 'row',
+    },
+    mLeft15: {
+      marginLeft: 15,
     }
+
 });

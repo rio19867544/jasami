@@ -11,15 +11,14 @@ export default class Head extends Component {
     this.props.navigation.goBack();
   }
   get() {
-    const { routeName } = this.props.navigation.state || {};
-    return routeName !== 'Home' ?
+    return this.props.needBack ?
     <Icon style={styles.icon} name="arrow-left" onPress={this.changeNav.bind(this)} /> : <Text style={styles.icon}/>;
   }
   render() {
     return (
       <View style={[styles.bar, styles.head]}>
         {this.get()}
-        <Text style={[styles.size24, styles.flex1, styles.bold, {fontFamily: '標楷體'}]}>呷瞎咪</Text>
+        <Text style={[styles.size24, styles.flex1, styles.bold, styles.white]}>{this.props.title || '呷瞎咪'}</Text>
         <Text style={styles.icon}/>
       </View>
     );

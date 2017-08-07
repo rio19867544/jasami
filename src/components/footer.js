@@ -13,9 +13,19 @@ const data = {
     target: 'Items',
   },{
     text: '標籤',
-    target: '',
+    target: 'Labels',
   }],
   Items: [{
+    text: '新增',
+    action: 'create',
+  },{
+    text: '修改',
+    action: 'modify',
+  },{
+    text: '刪除',
+    action: 'delete',
+  }],
+  Labels: [{
     text: '新增',
     action: 'create',
   },{
@@ -30,9 +40,15 @@ const data = {
 export default class Footer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      now: '',
+    };
   }
   changeNav({target, action}) {
-    if (action) return this.props[action]();
+    if (action) {
+      this.setState({now: this.state.now !== action && action});
+      return this.props[action]();
+    }
     if (!target) return;
     this.props.navigation.navigate(target);
   }
@@ -46,7 +62,7 @@ export default class Footer extends Component {
             <TouchableOpacity style={styles.flex1} key={item.text}
               onPress={this.changeNav.bind(this, item)}>
               <Text style={[styles.white, styles.size20, index && styles.borderLeft]}>
-                {item.text}
+                { item.action === 'create' || item.action !== this.state.now ? item.text : '關閉'}
               </Text>
             </TouchableOpacity>
           ))
