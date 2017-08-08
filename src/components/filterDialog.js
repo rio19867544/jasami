@@ -9,12 +9,11 @@ import {
 import styles from '../style/styles.js';
 import ChooseLabels from '../components/chooseLabels.js';
 
-export default class ItemDialog extends Component {
+export default class FilterDialog extends Component {
   constructor(props) {
     super(props);
     const { labels, data } = this.props;
     this.state = {
-      text: (data && data.text) || '',
       labels: labels.map((label) => {
         label.selected = data.labels && data.labels.indexOf(label.id) > -1;
         return label;
@@ -26,8 +25,6 @@ export default class ItemDialog extends Component {
   }
   save() {
     this.props.save({
-      ...this.props.data,
-      text: this.state.text,
       labels: this.state.labels
         .filter(label => label.selected)
         .map(item => item.id)
@@ -53,19 +50,10 @@ export default class ItemDialog extends Component {
             <View style={[styles.dialog, styles.bgWhite]}>
               <Text style={styles.dialogTitle}>{this.props.data.title}</Text>
               <View style={styles.flex1}>
-                <View style={styles.dialogItem}>
-                  <Text style={styles.itemTitle}>店家 ：</Text>
-                  <TextInput style={styles.inputNoBorder} placeholder='輸入店家名稱'
-                  value={this.state.text}
-                  onChangeText={(text) => this.setState({text})}/>
-                </View>
-                <View style={[styles.flex1, {margin: 10}]}>
-                  <Text style={styles.itemTitle}>標籤選擇</Text>
-                  <ChooseLabels
-                    style={{ borderWidth: 1, borderColor: '#b7b7b7',marginTop: 10,}}
-                    onSelect={this.select.bind(this)}
-                    labels={this.state.labels}/>
-                </View>
+                <ChooseLabels
+                  style={{ borderWidth: 1, borderColor: '#b7b7b7'}}
+                  onSelect={this.select.bind(this)}
+                  labels={this.state.labels}/>
               </View>
               <View style={[styles.bar, styles.dialogFooter]}>
                 <Text

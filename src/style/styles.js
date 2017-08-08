@@ -35,6 +35,24 @@ export default StyleSheet.create({
       borderColor: color.blue,
       margin: 10,
     },
+    homeAction: {
+      width: 200,
+      height: 100,
+      padding: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius:20,
+      borderWidth: 1,
+      backgroundColor:color.blue,
+      borderColor: color.blue,
+      margin: 10,
+    },
+    hideIcon: {
+      justifyContent: 'flex-end',
+      width: '100%',
+      flexDirection: 'row',
+      height: 50
+    },
     listItem: {
       flexDirection:'row',
       backgroundColor: "#cee7f3",
@@ -71,8 +89,8 @@ export default StyleSheet.create({
     dialogFooter:{
       bottom: 0,
       height: 40,
-      borderTopWidth: 1,
-      borderTopColor: '#b7b7b7',
+      borderTopWidth: 2,
+      borderTopColor: color.blue,
     },
     dialogItem: {
       alignItems: 'center',
@@ -80,29 +98,17 @@ export default StyleSheet.create({
       margin: 10,
     },
     itemTitle: {
-      fontSize: 16,
+      fontSize: 20,
       fontWeight: 'bold',
-    },
-    input: {
-      borderWidth: 1,
-      borderColor: '#b7b7b7',
-      height: 35,
-      borderRadius: 5,
-      fontSize: 12,
-      flex:1,
     },
     inputNoBorder: {
       flex:1,
-      height: 35,
-      borderRadius: 5,
-      fontSize: 12,
+      fontSize: 16,
+      marginHorizontal: 5,
     },
     chooseArea: {
-      borderWidth: 1,
-      borderColor: '#b7b7b7',
       height: 200,
       borderRadius: 5,
-      marginTop: 10,
     },
     chooseItem:{
       flexDirection:'row',
@@ -117,18 +123,94 @@ export default StyleSheet.create({
     },
     labelSmall: {
       marginLeft: 5,
-      width: 30,
-      height: 30,
+      width: 35,
+      height: 35,
     },
     textIcon: {
-      borderWidth: 2,
-      borderColor: '#b7b7b7',
-      backgroundColor: 'white',
-      borderRadius: 20,
-      maxHeight: 40,
-      maxWidth: 40,
+      borderColor: '#B97A57',
+      backgroundColor: '#B97A57',
+      color: 'white',
+      borderRadius: 5,
+      alignItems: 'center',
+      fontSize: 16,
+      padding: 5,
+      marginLeft: 5,
+      maxWidth: 80,
+      justifyContent: 'center',
+    },
+    rowView: {
+      flexDirection: 'row',
+      width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
+    },
+    columnView: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 300,
+    },
+    rowtextView: {
+      borderRightWidth:1,
+      borderBottomWidth:1,
+      borderTopWidth:1,
+      borderColor: 'brown',
+      flexGrow: 1,
+      height: 50,
+      textAlign: 'center',
+      lineHeight: 40,
+      fontSize: 20,
+    },
+    columntextView: {
+      borderRightWidth:1,
+      borderLeftWidth:1,
+      borderBottomWidth:1,
+      borderColor: 'brown',
+      flexGrow: 1,
+      width:60,
+      textAlign: 'center',
+      lineHeight: 40,
+      fontSize: 20,
+    },
+    rowtextViewSelected: {
+      borderRightWidth:1,
+      borderBottomWidth:1,
+      borderTopWidth:1,
+      borderColor: 'brown',
+      flexGrow: 1,
+      height: 50,
+      backgroundColor: 'red',
+      textAlign: 'center',
+      lineHeight: 40,
+      fontSize: 20,
+    },
+    columntextViewSelected: {
+      borderRightWidth:1,
+      borderLeftWidth:1,
+      borderBottomWidth:1,
+      borderColor: 'brown',
+      flexGrow: 1,
+      width:60,
+      backgroundColor: 'red',
+      textAlign: 'center',
+      lineHeight: 40,
+      fontSize: 20,
+    },
+    itemView: {
+      height:160,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex:1,
+    },
+    item: {
+      fontSize: 40,
+      color: 'black',
+    },
+    icon: {
+      color: '#fff',
+      fontSize: 30,
+      width: 60,
+      textAlign: 'center'
     },
     // basic property
     borderBlack: {
@@ -143,14 +225,12 @@ export default StyleSheet.create({
       borderLeftWidth: 1,
       borderLeftColor: '#b7b7b7',
     },
+    borderLeftWidthBlue: {
+      borderLeftWidth: 2,
+      borderLeftColor: color.blue,
+    },
     padding10: {
       padding: 10,
-    },
-    icon: {
-      color: '#fff',
-      fontSize: 30,
-      width: 80,
-      textAlign: 'center'
     },
     flex1: {
       flex:1,
@@ -163,6 +243,11 @@ export default StyleSheet.create({
       flex:1,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    flexCE1: {
+      flex:1,
+      alignItems: 'center',
+      justifyContent: 'flex-end',
     },
     size24: {
       fontSize: 24,
@@ -191,5 +276,4 @@ export default StyleSheet.create({
     mLeft15: {
       marginLeft: 15,
     }
-
 });

@@ -1,7 +1,16 @@
 export default [
 { id: 0, icon: require('../img/rice.png'), text : '飯' },
 { id: 1,icon: require('../img/noodle.png'), text: '麵' },
-{ id: 2,icon: require('../img/drink.png'), text: '飲料'},
-{ id: 3,icon: require('../img/dessert.png'), text: '甜點' },
-{ id: 4,icon: require('../img/food-shrimp.png'),text: '大餐'},
-{ id: 5,icon: require('../img/ice.png'), text: '冰' }];
+{ id: 2,icon: require('../img/dumpling.png'), text: '水餃' },
+{ id: 3,icon: require('../img/fastfood.png'), text: '速食' },
+{ id: 4,icon: require('../img/drink.png'), text: '飲料'},
+{ id: 5,icon: require('../img/snack.png'), text: '點心' },
+{ id: 6,icon: require('../img/feast.png'),text: '大餐'},
+{ id: 7,icon: require('../img/brunch.png'), text: '早午餐' },
+{ id: 8,icon: require('../img/chili.png'), text: '辣DER' },
+{ id: 9,icon: require('../img/ice.png'), text: '冰' },
+{ id: 10,icon: require('../img/japan.png'), text: '日式' },
+{ id: 11,icon: require('../img/korea.png'), text: '韓式' },
+{ id: 12,icon: require('../img/us.png'), text: '美式' },
+{ id: 13,icon: require('../img/vietnam.png'), text: '越式' },
+{ id: 14,icon: require('../img/thailand.png'), text: '泰式' }];

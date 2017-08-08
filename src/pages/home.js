@@ -7,7 +7,9 @@ import {
     View,
     AsyncStorage,
     TouchableOpacity,
-    Image
+    Image,
+    ScrollView,
+    Alert
 } from 'react-native';
 
 import FadeInView from '../components/fadeInView.js';
@@ -15,24 +17,81 @@ import LandingPage from './landingPage.js';
 import styles from '../style/styles.js';
 import Footer from '../components/footer.js';
 import Head from '../components/head.js';
+import FilterDialog from '../components/filterDialog.js';
+import Maatai from '../components/maataiDialog.js';
+import defaultLabels from '../data/defaultLabels.js';
 
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props){
+     super(props);
+     this.state = { allItems: []};
+   }
+  componentDidMount() {
+     AsyncStorage.multiGet(['allItems', 'allLabels']).then((stores) => {
+       const data = stores.reduce((pre, [key, value]) => {
+         return {
+           ...pre,
+           [key]: (value && JSON.parse(value)) || [],
+         }
+       },{});
+      this.setState(data);
+     }).done();
+  }
+  getAllLabels() {
+    const datas = (this.state && this.state.allLabels) || [];
+    return defaultLabels.concat(datas);
+  }
+  filterStatus() {
+    this.setState({...this.state, isFilter: !this.state.isFilter});
+  }
+  handleFilter({labels}) {
+    const randomItems = this.state.allItems
+      .filter(item => item.labels.some(id => labels.indexOf(id) !== -1));
+    this.setState({
+      ...this.state,
+      labels,
+      randomItems,
+      isFilter: false,
+      isMaatai: false,
+    });
+  }
+  start() {
+    const { randomItems, allItems, isMaatai } = this.state;
+    const itemsLenth = (randomItems || allItems).length;
+    if (itemsLenth < 4) {
+      Alert.alert('哩賣亂!!', '沒有四個是要隨機個毛逆~快去新增!');
+    } else {
+      this.setState({...this.state, isMaatai: !isMaatai});
+    }
   }
   render() {
     return (
       <View style={styles.container}>
         {/* <LandingPage/> */}
-        <Head navigation={this.props.navigation}/>
+        <Head navigation={this.props.navigation}
+          needFilter={this.filterStatus.bind(this)}/>
         <View style={styles.container}>
-          <TouchableOpacity style={styles.action}>
-            <Text style={styles.size24}>
-              Start
+          { this.state.isMaatai &&
+            <Maatai
+              items={this.state.randomItems || this.state.allItems}
+              hide={() => this.setState({...this.state, isMaatai: false})}
+            />
+          }
+          <TouchableOpacity style={styles.homeAction}
+            onPress={this.start.bind(this)}>
+            <Text style={[{color: 'white', fontSize: 35}]}>
+              點我!!!!!!!
             </Text>
           </TouchableOpacity>
         </View>
         <Footer navigation={this.props.navigation}/>
+        {this.state.isFilter &&
+          <FilterDialog
+            labels={this.getAllLabels()}
+            data={{labels: this.state.labels, title: '選你要DER'}}
+            save={this.handleFilter.bind(this)}
+            hide={this.filterStatus.bind(this)}
+          />}
       </View>
     );
   }

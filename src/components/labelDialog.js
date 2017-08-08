@@ -21,7 +21,7 @@ export default class LabelDialog extends Component {
   save() {
     this.props.save({
       ...this.props.data,
-      ...this.state.text,
+      ...this.state,
     });
   }
   render() {
@@ -34,7 +34,7 @@ export default class LabelDialog extends Component {
           <View style={styles.mask}>
             <View style={[styles.dialogSmall, styles.bgWhite]}>
               <Text style={styles.dialogTitle}>{this.props.data.title}</Text>
-              <View style={[styles.dialogItem, { margin: 20}]}>
+              <View style={[styles.dialogItem, { margin: 20, flex: 1}]}>
                 <Text style={styles.itemTitle}>標籤 ：</Text>
                 <TextInput
                   onChangeText={(text) => this.setState({text})}
@@ -47,7 +47,7 @@ export default class LabelDialog extends Component {
                   style={[styles.flex1, styles.size20, styles.bold, styles.padding10]}
                   onPress={this.close.bind(this)}>取消</Text>
                 <Text
-                  style={[styles.flex1, styles.size20, styles.bold, styles.borderLeft, styles.padding10]}
+                  style={[styles.flex1, styles.size20, styles.bold, styles.borderLeftWidthBlue, styles.padding10]}
                   onPress={this.save.bind(this)}>儲存</Text>
               </View>
             </View>

@@ -45,29 +45,38 @@ export default class Items extends Component {
       return defaultLabels.concat(datas);
     }
     getLabel(data) {
+      if (!data.icon) {
+        return (
+          <Text key={`${data.text}-${data.id}`} style={styles.textIcon}
+            numberOfLines={1}>
+            {data.text}
+          </Text>);
+      }
       return data && <Image style={styles.labelSmall} key={`${data.text}-${data.id}`}
-        source={data.icon || require('../img/other.png')}/>;
+        source={data.icon}/>;
     }
     getData() {
       const { isModify, isDelete } = this.state;
       const datas = (this.state && this.state.allItems) || [];
       return datas.map((data, index) => (
         <View  key={'list' + index} style={[styles.listItem, index && styles.borderTop]}>
-          <View>
-            <View style={[styles.flexC1, styles.flexRow]}>
-              <Text style={[styles.size20, styles.bold]}>{data.text}</Text>
+          <View style={[styles.flexC1, styles.flexRow]}>
+            <Text style={[styles.size20, styles.bold]}>{data.text}</Text>
+            <View style={[styles.flexCE1, styles.flexRow]}>
               {data.labels.map((labelId) => {
                   const image = this.getAllLabels().find(label => label.id === labelId);
                   return this.getLabel(image);
                 })}
             </View>
           </View>
-          {!data.icon && isDelete &&
-            <Icon name='trash-o' size={25} color='#ca5353'
-            onPress={this.deletaData.bind(this, data)}/>}
-          {!data.icon && isModify &&
-            <Icon name='pencil-square-o' size={25} color='#255496'
+          <View style={[{minWidth: 40, paddingLeft: 10}]}>
+            {!data.icon && isDelete &&
+              <Icon name='trash-o' size={25} color='#ca5353' style={{textAlign: 'center'}}
+              onPress={this.deletaData.bind(this, data)}/>}
+            {!data.icon && isModify &&
+              <Icon name='pencil-square-o' size={25} color='#255496'    style={{textAlign: 'center'}}
               onPress={this.modifyData.bind(this, data)}/>}
+          </View>
         </View>
       ));
     }

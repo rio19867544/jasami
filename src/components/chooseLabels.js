@@ -15,7 +15,7 @@ export default class ChooseLabels extends Component {
   }
   render() {
     return (
-      <ScrollView style={styles.chooseArea}>
+      <ScrollView style={[styles.chooseArea]} {...this.props.style}>
         {
           this.props.labels.map((label, $i) => {
             const color = label.selected ? '#1d9d74' : '#ddd';
