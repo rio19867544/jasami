@@ -121,11 +121,6 @@ export default StyleSheet.create({
       width: 40,
       height: 40,
     },
-    labelSmall: {
-      marginLeft: 5,
-      width: 35,
-      height: 35,
-    },
     textIcon: {
       borderColor: '#B97A57',
       backgroundColor: '#B97A57',

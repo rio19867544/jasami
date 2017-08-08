@@ -52,7 +52,7 @@ export default class Items extends Component {
             {data.text}
           </Text>);
       }
-      return data && <Image style={styles.labelSmall} key={`${data.text}-${data.id}`}
+      return data && <Image style={[styles.label, {marginLeft: 5}]} key={`${data.text}-${data.id}`}
         source={data.icon}/>;
     }
     getData() {
