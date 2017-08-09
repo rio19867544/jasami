@@ -1,12 +1,16 @@
 import React from 'react';
 import { Animated, Text, View } from 'react-native';
+import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter';
 
-export default class FadeInView extends React.Component {
+export default class FadeOutView extends React.Component {
   state = {
     fadeAnim: new Animated.Value(1),  // Initial value for opacity: 0
   }
 
   componentDidMount() {
+    RCTDeviceEventEmitter.addListener('start-fade-out', this.startAnimate.bind(this));
+  }
+  startAnimate() {
     Animated.timing(                  // Animate over time
       this.state.fadeAnim,            // The animated value to drive
       {

@@ -9,9 +9,9 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Alert
+    Alert,
 } from 'react-native';
-
+import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter';
 import FadeInView from '../components/fadeInView.js';
 import LandingPage from './landingPage.js';
 import styles from '../style/styles.js';
@@ -23,19 +23,30 @@ import defaultLabels from '../data/defaultLabels.js';
 
 export default class Home extends Component {
   constructor(props){
-     super(props);
-     this.state = { allItems: []};
-   }
+    super(props);
+    this.state = { allItems: []};
+  }
   componentDidMount() {
-     AsyncStorage.multiGet(['allItems', 'allLabels']).then((stores) => {
-       const data = stores.reduce((pre, [key, value]) => {
-         return {
-           ...pre,
-           [key]: (value && JSON.parse(value)) || [],
-         }
-       },{});
-      this.setState(data);
-     }).done();
+    this.getAsyncStorageData(true);
+    RCTDeviceEventEmitter.addListener('update-state', this.getAsyncStorageData.bind(this));
+  }
+  getAsyncStorageData(closeLanding = false) {
+    AsyncStorage.multiGet(['allItems', 'allLabels']).then((stores) => {
+      const data = stores.reduce((pre, [key, value]) => {
+        return {
+          ...pre,
+          [key]: (value && JSON.parse(value)) || [],
+        }
+      },{});
+      if (closeLanding) {
+        RCTDeviceEventEmitter.emit('start-fade-out');
+        setTimeout(() => {
+          this.setState({...data, closeLandingPage: true});
+        }, 1000);
+      } else {
+        this.setState(data);
+      }
+    }).done();
   }
   getAllLabels() {
     const datas = (this.state && this.state.allLabels) || [];
@@ -65,15 +76,16 @@ export default class Home extends Component {
     }
   }
   render() {
+    const { closeLandingPage, isMaatai, labels, allItems, randomItems } = this.state;
     return (
       <View style={styles.container}>
-        {/* <LandingPage/> */}
+        {!closeLandingPage && <View style={{position: 'absolute', zIndex: 10, height: '100%'}}><LandingPage/></View>}
         <Head navigation={this.props.navigation}
-          needFilter={this.filterStatus.bind(this)}/>
+            needFilter={this.filterStatus.bind(this)}/>
         <View style={styles.container}>
-          { this.state.isMaatai &&
+          { isMaatai &&
             <Maatai
-              items={this.state.randomItems || this.state.allItems}
+              items={randomItems || allItems}
               hide={() => this.setState({...this.state, isMaatai: false})}
             />
           }
@@ -85,13 +97,15 @@ export default class Home extends Component {
           </TouchableOpacity>
         </View>
         <Footer navigation={this.props.navigation}/>
-        {this.state.isFilter &&
+        {
+          this.state.isFilter &&
           <FilterDialog
             labels={this.getAllLabels()}
-            data={{labels: this.state.labels, title: '選你要DER'}}
+            data={{ labels, title: '選你要DER'}}
             save={this.handleFilter.bind(this)}
             hide={this.filterStatus.bind(this)}
-          />}
+          />
+         }
       </View>
     );
   }

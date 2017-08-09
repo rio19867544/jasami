@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import styles from '../style/styles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RCTDeviceEventEmitter from 'RCTDeviceEventEmitter';
 
 export default class Head extends Component {
   constructor(props) {
     super(props);
   }
   changeNav() {
+    RCTDeviceEventEmitter.emit('update-state');
     this.props.navigation.goBack();
   }
   getBack() {
